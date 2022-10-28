@@ -7,11 +7,13 @@ variable "resource_group_name" {
 variable "network_name" {
   description = "The name of network."
   type        = string
+  default     = ""
 }
 
 variable "address_space" {
   description = "The address space that is used the virtual network."
   type        = string
+  default = ""
 }
 
 variable "address_spaces" {
@@ -23,6 +25,7 @@ variable "address_spaces" {
 variable "dns_servers" {
   description = "List of IP addresses of DNS servers."
   type        = list(string)
+  default     = []
 }
 
 variable "tags" {
