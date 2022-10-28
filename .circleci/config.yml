@@ -9,6 +9,7 @@ jobs:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - checkout
+      - azure-cli/login-with-service-principal
       - run:
           name: "Check terraform code"
           command: |
