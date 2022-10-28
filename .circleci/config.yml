@@ -3,14 +3,12 @@ orbs:
   azure-cli: circleci/azure-cli@1.2.2
 
 jobs:
-  validate:
+  validate-plan:
     working_directory: /tmp/project
-    # executor: azure-cli/azure-docker
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - checkout
-      # - azure-cli/login-with-service-principal
       - run:
           name: "Check terraform code"
           command: |
@@ -18,9 +16,78 @@ jobs:
             terraform init -input=false
             terraform validate
             terraform plan -out tfapply-azure
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  apply:
+    working_directory: /tmp/project
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Run apply"
+          command: |
+            cd ./azure
+            terraform apply tfapply-azure
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  
+  plan-destroy:
+    working_directory: /tmp/project
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Running Plan to Destroy"
+          command: |
+            cd ./azure
+            terraform plan -destroy -out tfdestroy-azure
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  
+  destroy:
+    working_directory: /tmp/project
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Running Plan to Destroy"
+          command: |
+            cd ./azure
+            terraform apply tfdestroy-azure
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 
 workflows:
   version: 2
-  lint:
+  deploy-destroy:
     jobs:
-      - validate
+      - validate-plan
+      - apply:
+          requires:
+            - validate-plan
+      - hold-destroy:
+          type: approval
+          requires:
+            - apply
+      - plan-destroy:
+          requires:
+            - hold-destroy
+      - destroy:
+          requires:
+            - plan-destroy
+
+      
