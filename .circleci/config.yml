@@ -5,12 +5,12 @@ orbs:
 jobs:
   validate:
     working_directory: /tmp/project
-    executor: azure-cli/azure-docker
-    # docker:
-    #   - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    # executor: azure-cli/azure-docker
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - checkout
-      - azure-cli/login-with-service-principal
+      # - azure-cli/login-with-service-principal
       - run:
           name: "Check terraform code"
           command: |
