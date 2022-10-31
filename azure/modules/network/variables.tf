@@ -13,7 +13,7 @@ variable "network_name" {
 variable "address_space" {
   description = "The address space that is used the virtual network."
   type        = string
-  default = ""
+  default     = ""
 }
 
 variable "address_spaces" {
