@@ -46,6 +46,6 @@ module "network" {
 ## Testing
 ---
 ```bash
-$ cd ./azure
+$ cd ./tests
 $ go test -v
 ```
