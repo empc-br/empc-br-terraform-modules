@@ -90,11 +90,10 @@ workflows:
   azure:
     jobs:
       - unit-test
-      - validate-plan:
-          requires:
-            - unit-test
+      - validate-plan
       - apply:
           requires:
+            - unit-test
             - validate-plan
       - hold-destroy:
           type: approval

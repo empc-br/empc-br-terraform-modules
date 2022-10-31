@@ -47,5 +47,5 @@ module "network" {
 ---
 ```bash
 $ cd ./tests
-$ go test -v
+$ go test -v network_test.go
 ```
