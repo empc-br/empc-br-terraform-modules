@@ -1,6 +1,6 @@
 units-tests:
 	@echo "Testing Azure modules..."
-	cd ./tests && go test -v  -timeout 45m
+	cd ./tests && go test -v  -timeout 90m
 
 validate-and-plan:
 	@echo "Running init..."
