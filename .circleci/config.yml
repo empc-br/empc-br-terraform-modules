@@ -15,6 +15,7 @@ jobs:
             sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt update && sudo apt install terraform
             curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+            az login --service-principal -u ${ARM_CLIENT_ID} -p ${ARM_CLIENT_SECRET} --tenant ${ARM_TENANT_ID}
             cd ./azure
             make units-tests
 
