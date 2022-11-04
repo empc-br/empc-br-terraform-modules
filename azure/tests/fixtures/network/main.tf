@@ -7,7 +7,7 @@ resource "random_id" "rg_id" {
 }
 
 resource "azurerm_resource_group" "test" {
-  name     = "empc-test-rg${random_id.rg_id.hex}"
+  name     = "empc-nw-test-rg${random_id.rg_id.hex}"
   location = var.location
 }
 

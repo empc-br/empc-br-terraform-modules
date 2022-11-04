@@ -1,6 +1,6 @@
 units-tests:
 	@echo "Testing Azure modules..."
-	cd ./tests && go test -v
+	cd ./tests && go test -v  -timeout 45m
 
 validate-and-plan:
 	@echo "Running init..."
@@ -21,3 +21,6 @@ plan-destroy:
 destroy:
 	@echo "Running apply to destroy..."
 	terraform apply tfdestroy-azure
+
+fmt:
+	@terraform fmt -recursive

@@ -18,3 +18,14 @@ output "virtual_network_address_space" {
 output "virtual_network_subnets" {
   value = module.network.virtual_network_subnets
 }
+
+# AKS Outputs
+output "client_certificate" {
+  value     = module.aks.client_certificate
+  sensitive = true
+}
+
+output "kube_config" {
+  value     = module.aks.kube_config
+  sensitive = true
+}

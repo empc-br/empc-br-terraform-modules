@@ -10,7 +10,7 @@ import (
 func TestNetwork(t *testing.T) {
 	t.Parallel()
 
-	fixtureFolder := "./fixture/network"
+	fixtureFolder := "./fixtures/network"
 
 	// Deploy network and subnets
 	test_structure.RunTestStage(t, "setup", func() {
