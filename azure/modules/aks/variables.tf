@@ -186,6 +186,7 @@ variable "tags" {
 variable "location" {
   type        = string
   description = "Location of cluster or log analytics, if not defined it will be read from the resource-group"
+  default     = null
 }
 
 variable "cluster_log_analytics_workspace_name" {
