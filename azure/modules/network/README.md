@@ -19,7 +19,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 module "network" {
-  source = "github.com/empc-br/empc-br-terraform-modules"
+  source = "github.com/empc-br/empc-br-terraform-modules/network"
 
   resource_group_name = azurerm_resource_group.test.name
   network_name        = "empc-test-nw"

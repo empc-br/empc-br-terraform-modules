@@ -5,12 +5,12 @@ variable "prefix" {
 
 variable "resource_group_name" {
   type        = string
-  description = "The name of resource group to use in AKS."
+  description = "(Required) The name of resource group to use in AKS."
 }
 
 variable "cluster_name" {
   type        = string
-  description = "The name of the cluster on AKS."
+  description = "(Required) The name of the cluster on AKS."
 }
 
 variable "dns_prefix" {
@@ -21,7 +21,7 @@ variable "dns_prefix" {
 
 variable "kubernetes_version" {
   type        = string
-  description = "(Optional) Version of Kubernetes specified when creating the AKS managed cluster. "
+  description = "(Optional) Version of Kubernetes specified when creating the AKS managed cluster."
   default     = null
 }
 
@@ -64,20 +64,20 @@ variable "enable_auto_scaling" {
 # If enable_auto_scaling is set to true, then the following fields can also be configured
 variable "max_count" {
   type        = number
-  description = "Maximum number of nodes in a pool"
+  description = "Maximum number of nodes in a pool."
   default     = null
 }
 
 variable "min_count" {
   type        = number
-  description = "Minimum number of nodes in a pool"
+  description = "Minimum number of nodes in a pool."
   default     = null
 }
 
 # If enable_auto_scaling is set to true or false, node_count is mandatory.
 variable "node_count" {
   type        = number
-  description = "(Optional) The initial number of nodes which should exist in this Node Pool."
+  description = "The initial number of nodes which should exist in this Node Pool."
   default     = 2
 }
 
@@ -186,7 +186,6 @@ variable "tags" {
 variable "location" {
   type        = string
   description = "Location of cluster or log analytics, if not defined it will be read from the resource-group"
-  default     = null
 }
 
 variable "cluster_log_analytics_workspace_name" {
